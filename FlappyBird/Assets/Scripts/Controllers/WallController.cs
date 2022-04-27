@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlappyBird.Controller
 {
-    public class WallController : MonoBehaviour
+       public class WallController : MonoBehaviour
     {
         
     }

@@ -343,8 +343,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/Controllers/GameController.cs"
+"Assets/Scripts/Controllers/PlayerController.cs"
 "Assets/Scripts/Controllers/WallController.cs"
 "Assets/Scripts/Models/WallModel.cs"
+"Assets/Scripts/Views/PlayerView.cs"
 "Assets/Scripts/Views/WallView.cs"
 -langversion:8.0
 
