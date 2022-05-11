@@ -346,6 +346,7 @@
 "Assets/Scripts/Controllers/PlayerController.cs"
 "Assets/Scripts/Controllers/WallController.cs"
 "Assets/Scripts/Models/WallModel.cs"
+"Assets/Scripts/Views/PartWallView.cs"
 "Assets/Scripts/Views/PlayerView.cs"
 "Assets/Scripts/Views/WallView.cs"
 -langversion:8.0

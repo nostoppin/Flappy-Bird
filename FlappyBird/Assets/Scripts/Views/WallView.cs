@@ -11,7 +11,12 @@ namespace FlappyBird.View
         #region Ints
         public float wallSpeed;
         #endregion
-       
+
+        #region Controllers
+        GameObject scoreController;
+        GameObject wallController;
+        #endregion
+
         void Start()
         {
             wallSpeed = 3f;
@@ -37,7 +42,36 @@ namespace FlappyBird.View
             if (this.transform.position.x <= -9.5f)
             {
                 DeactivateSelf(true);
+
+                wallController = GameObject.Find("WallController");
+                wallController.GetComponent<WallController>().wallPassCount += 1;
+
+                print(wallController.GetComponent<WallController>().wallPassCount);
+
+                if (wallController.GetComponent<WallController>().wallPassCount >= 5)
+                {
+                    //increase complexity
+                    //ComplexityModifier();
+
+                    wallController.GetComponent<WallController>().ResetWallPasses();
+                }
             }
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                //print("SCORE!");
+
+                scoreController = GameObject.Find("ScoreController");
+                scoreController.GetComponent<ScoreController>().IncrementScore(10);
+            }
+        }
+
+        // private void ComplexityModifier()
+        // {
+        //     wallSpeed += 5f;
+        // }
     }
 }

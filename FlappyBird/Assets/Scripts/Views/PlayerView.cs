@@ -11,7 +11,7 @@ namespace FlappyBird.View
 
         private void Start()
         {
-            playerJumpVel = 3.5f;
+            playerJumpVel = 5.5f;
         }
         public void MovePlayer()
         {

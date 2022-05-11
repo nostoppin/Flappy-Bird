@@ -65,7 +65,7 @@ namespace FlappyBird.Controller
                 {
                     if (!obstacleArray[i].activeInHierarchy)
                     {
-                        float randomValue_Y = Random.Range(-5f, 5f);
+                        float randomValue_Y = Random.Range(-4f, 4f);
 
                         obstacleArray[i].transform.position = new Vector2(9.5f, randomValue_Y);
                         obstacleArray[i].SetActive(true);
