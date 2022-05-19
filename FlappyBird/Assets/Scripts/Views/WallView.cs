@@ -9,7 +9,7 @@ namespace FlappyBird.View
     public class WallView : MonoBehaviour
     {
         #region Ints
-        public float wallSpeed;
+        // public float wallSpeed;
         #endregion
 
         #region Controllers
@@ -17,9 +17,13 @@ namespace FlappyBird.View
         GameObject wallController;
         #endregion
 
-        void Start()
+        #region models
+
+        #endregion
+
+        void Awake()
         {
-            wallSpeed = 3f;
+            wallController = GameObject.Find("WallController");
         }
         private void Update()
         {
@@ -28,7 +32,7 @@ namespace FlappyBird.View
 
         void MoveThisWall()
         {
-            this.transform.Translate(new Vector2(-1, 0) * wallSpeed * Time.deltaTime);
+            this.transform.Translate(new Vector2(-1, 0) * wallController.GetComponent<WallController>().currentObstacleSpeed * Time.deltaTime);
             CheckBounds();
         }
 
@@ -45,13 +49,17 @@ namespace FlappyBird.View
 
                 wallController = GameObject.Find("WallController");
                 wallController.GetComponent<WallController>().wallPassCount += 1;
+                wallController.GetComponent<WallController>().timeComplexityvalue += 1;
 
-                print(wallController.GetComponent<WallController>().wallPassCount);
+                if (wallController.GetComponent<WallController>().timeComplexityvalue >= 15)
+                {
+                    wallController.GetComponent<WallController>().spawnComplexityBool = true;
+                }
 
                 if (wallController.GetComponent<WallController>().wallPassCount >= 5)
                 {
                     //increase complexity
-                    //ComplexityModifier();
+                    wallController.GetComponent<WallController>().CallComplexityController();
 
                     wallController.GetComponent<WallController>().ResetWallPasses();
                 }
@@ -69,9 +77,5 @@ namespace FlappyBird.View
             }
         }
 
-        // private void ComplexityModifier()
-        // {
-        //     wallSpeed += 5f;
-        // }
     }
 }

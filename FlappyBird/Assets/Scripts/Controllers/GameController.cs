@@ -8,6 +8,7 @@ namespace FlappyBird.Controller
     {
         [SerializeField] WallController wallController;
         [SerializeField] PlayerController playerController;
+        [SerializeField] UIController uIController;
 
         #region GameObjects
         [SerializeField] GameObject obstacleWall;
@@ -22,8 +23,12 @@ namespace FlappyBird.Controller
 
         #region Floats
         private float spawnStartTime;
-        private float spawnIntervalTime;
+        public float spawnIntervalTime;
         private float spawnElapsedTime;
+        #endregion
+
+        #region bools
+        public bool keepSpawnObstacles;
         #endregion
 
         void Start()
@@ -32,6 +37,7 @@ namespace FlappyBird.Controller
             obstacleArray = new GameObject[wallCount];
 
             InitObstacleArray();
+            keepSpawnObstacles = true;
 
             spawnIntervalTime = 3f;
             spawnStartTime = Time.time;
@@ -39,7 +45,10 @@ namespace FlappyBird.Controller
 
         void Update()
         {
-            SpawnObstacles();
+            if (keepSpawnObstacles)
+            {
+                SpawnObstacles();
+            }
 
             playerController.CheckInput();
         }
@@ -65,7 +74,7 @@ namespace FlappyBird.Controller
                 {
                     if (!obstacleArray[i].activeInHierarchy)
                     {
-                        float randomValue_Y = Random.Range(-4f, 4f);
+                        float randomValue_Y = Random.Range(-3f, 2f);
 
                         obstacleArray[i].transform.position = new Vector2(9.5f, randomValue_Y);
                         obstacleArray[i].SetActive(true);
@@ -77,6 +86,21 @@ namespace FlappyBird.Controller
                     }
                 }
             }
+        }
+
+        public void DeactivateAllObstacles()
+        {
+            for (int i = 0; i < obstacleArray.Length; i++)
+            {
+                obstacleArray[i].SetActive(false);
+            }
+
+            Invoke("CallGameOverPanel", 1.5f);
+        }
+
+        public void CallGameOverPanel()
+        {
+            uIController.InitGameOver();
         }
     }
 }

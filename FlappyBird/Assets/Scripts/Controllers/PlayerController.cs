@@ -8,14 +8,32 @@ namespace FlappyBird.Controller
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] PlayerView playerView;
+        [SerializeField] GameController gameController;
+
+        //only modified by partWallView
+        public bool playHasControl;
+
+        void Start()
+        {
+            playHasControl = true;
+        }
         public void CheckInput()
         {
-            PlayerMovement();
+            if(playHasControl)
+            {
+                PlayerMovement();
+            }
+            
         }
 
         private void PlayerMovement()
         {
             playerView.MovePlayer();
+        }
+
+        public void SwitchOffGameElements()
+        {
+            gameController.CallGameOverPanel();
         }
     }
 }

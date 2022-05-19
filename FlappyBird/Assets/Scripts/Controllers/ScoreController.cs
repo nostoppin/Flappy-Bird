@@ -2,36 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FlappyBird.Controller;
 
-public class ScoreController : MonoBehaviour
+namespace FlappyBird.Controller
 {
-    #region ints
-    public int currentScore;
-    
-    #endregion
-
-    #region UI
-
-    [SerializeField] Text osdScoreText;
-    
-    #endregion
-
-
-    void Start()
+    public class ScoreController : MonoBehaviour
     {
-        currentScore = 0; 
-        osdScoreText.text = currentScore.ToString();
-    }
+        #region ints
+        public int currentScore;
 
-    public void IncrementScore(int score)
-    {
-        currentScore += score;
+        #endregion
 
-        UpdateOSDScore();
-    }
+        #region UI
+        [SerializeField] Text osdScoreText;
+        #endregion
 
-    void UpdateOSDScore()
-    {
-        osdScoreText.text = currentScore.ToString();
+        [SerializeField] UIController uiController;
+
+
+        void Start()
+        {
+            currentScore = 0;
+            osdScoreText.text = currentScore.ToString();
+        }
+
+        public void IncrementScore(int score)
+        {
+            currentScore += score;
+
+            UpdateOSDScore();
+
+            uiController.InitComplimentText();
+        }
+
+        void UpdateOSDScore()
+        {
+            osdScoreText.text = currentScore.ToString();
+        }
     }
 }
